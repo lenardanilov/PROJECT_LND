@@ -28,42 +28,42 @@ class OrderDataClass:
         self.amount=amount
 
 
-    def calculatediscount(self,customerobj):
-       """Расчет скидки."""
-       totalamount = customerobj.gettotalamount()
+def calculatediscount(customerobj):
+   """Расчет скидки."""
+   totalamount = customerobj.gettotalamount()
    
-       discount = totalamount * 0.1 if totalamount > 1000 else 0
+   discount = totalamount * 0.1 if totalamount > 1000 else 0
       
-       return discount
+   return discount
 
 
-    def printcustomerreport(self,customerobj):
-        """Вывод полученных данных."""
-        print('Customer Report for:',customerobj.CustomerName)
-        print('Total Orders:', len(customerobj.Orders))
-        print('Total Amount:', customerobj.gettotalamount())
-        print('Discount:', self.calculatediscount(customerobj))
+def printcustomerreport(customerobj):
+    """Вывод полученных данных."""
+    print('Customer Report for:',customerobj.CustomerName)
+    print('Total Orders:', len(customerobj.Orders))
+    print('Total Amount:', customerobj.gettotalamount())
+    print('Discount:', calculatediscount(customerobj))
 
-        #проверка на 0.
-        avr_order = float('0.00')
+    #проверка на 0 перед делением.
+    avr_order = float('0.00')
 
-        if len(customerobj.Orders) != 0:
-            avr_order = customerobj.gettotalamount()/len(customerobj.Orders)
+    if len(customerobj.Orders) != 0:
+        avr_order = customerobj.gettotalamount()/len(customerobj.Orders)
 
         print('Average Order:',avr_order)
 
 
-    def mainprogram(self):
-        """Основной метод. Выполнение рассчета скидки и вывод полученных данных."""
-        c1=CustomerDataClass(1,'SAP Customer')
-        o1=OrderDataClass(101,500)
-        o2=OrderDataClass(102,800)
-        c1.addorder(o1)
-        c1.addorder(o2)
-        o1.printcustomerreport(c1)
-        c2=CustomerDataClass(2,'Empty Customer')
-        o2.printcustomerreport(c2) 
+def mainprogram():
+    """Основной метод. Выполнение рассчета скидки и вывод полученных данных."""
+    c1=CustomerDataClass(1,'SAP Customer')
+    o1=OrderDataClass(101,500)
+    o2=OrderDataClass(102,800)
+    c1.addorder(o1)
+    c1.addorder(o2)
+    printcustomerreport(c1)
+    c2=CustomerDataClass(2,'Empty Customer')
+    printcustomerreport(c2) 
+
 
 #Запус основного метода
-cmain=OrderDataClass(0,0)
-cmain.mainprogram()
+mainprogram()
